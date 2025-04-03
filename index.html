@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <video autoplay muted controls loop playsinline>
+    <video autoplay controls loop playsinline>
         <source src="vid.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -29,18 +29,15 @@
         // Try to autoplay
         video.play().catch(error => console.log("Autoplay failed:", error));
 		
-		setTimeout(function(){
-    if (video.muted === true) {
-		video.muted = false;
-		}
-}, 2000);
+
+
 		
 
         // Unmute when user interacts with the page
-        //document.addEventListener("play", function () {
-         //   video.muted = false;
-        //    console.log("Video unmuted!");
-        //} 
+        document.addEventListener("Click", function () {
+           video.muted = false;
+           console.log("Video unmuted!");
+        } 
     });
 </script>
 
