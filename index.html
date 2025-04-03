@@ -28,12 +28,19 @@
 
         // Try to autoplay
         video.play().catch(error => console.log("Autoplay failed:", error));
+		
+		setTimeout(function(){
+    if (video.muted === true) {
+		video.muted = false;
+		}
+}, 2000);
+		
 
         // Unmute when user interacts with the page
-        document.addEventListener("click", function () {
-            video.muted = false;
-            console.log("Video unmuted!");
-        }, { once: true }); // Ensures it runs only once
+        //document.addEventListener("play", function () {
+         //   video.muted = false;
+        //    console.log("Video unmuted!");
+        //} 
     });
 </script>
 
