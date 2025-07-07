@@ -1,18 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>ChatGPT Wrapper</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortable Spreadsheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="chat-container">
-    <div id="chat-log"></div>
-    <form id="chat-form">
-      <input type="text" id="chat-input" placeholder="Say something..." autocomplete="off" />
-      <button type="submit">Send</button>
-    </form>
-  </div>
-  <script src="script.js"></script>
+<body class="bg-gray-100 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold">Sortable Spreadsheet</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto my-8 p-4 bg-white rounded-lg shadow-md">
+        <section>
+            <h2 class="text-xl font-semibold mb-4">Data Table</h2>
+            <div class="overflow-x-auto">
+                <table id="dataTable" class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(0)">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sort побач
+
+System: It looks like your instruction was cut off. Based on your request, I'll complete the update to the spreadsheet webpage by replacing the "Age" column with "HP" and populating it with the provided values in the specified order: 34000, 26000, 70000, 48000, 28000, 50000, 32000, 39000, 37000, 38000, 78000, 38000, 47000, 31000, 30000. The "Name" column will retain the previously provided names (Alysnes, Falcon, Tricera, Welkin, Narukami, Hurricane, Luminae, Aquila, Pinaka, Skyraider, Stego, Panther, Inferno, Serenith, Stellaris), and the "Score" column will keep the placeholder values. The sorting functionality and Tailwind CSS styling will remain unchanged. I'll ensure the table is fully functional and matches your requirements.
+
+<xaiArtifact artifact_id="6848969a-8b36-4750-8fb8-ee572de44adb" artifact_version_id="8a8019fc-a6aa-40a5-a15e-28dabc9905ca" title="index.html" contentType="text/html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortable Spreadsheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold">Sortable Spreadsheet</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto my-8 p-4 bg-white rounded-lg shadow-md">
+        <section>
+            <h2 class="text-xl font-semibold mb-4">Data Table</h2>
+            <div class="overflow-x-auto">
+                <table id="dataTable" class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(0)">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(1)">Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(2)">HP</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(3)">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Alysnes</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">34000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">85.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Falcon</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">26000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">92.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Tricera</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">70000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">78.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">4</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Welkin</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">48000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">88.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">5</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Narukami</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">90.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">6</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Hurricane</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">50000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">87.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">7</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Luminae</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">91.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">8</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Aquila</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">39000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">84.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">9</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Pinaka</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">37000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">89.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">10</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Skyraider</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38000</td>
+                            <td class="px-6 LLPy-4 whitespace-nowrap text-sm text-gray-900">86.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">11</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Stego</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">78000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">80.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">12</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Panther</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">93.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">13</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Inferno</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">47000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">79.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">14</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Serenith</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">31000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">94.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-grayIt looks like there was a slight truncation in the previous response. I'll complete the webpage by ensuring the table includes all 15 rows with the correct data for the "HP" column, matching the provided values, and maintaining the existing "Name" and "Score" columns. The "Age" column is now replaced with "HP" in the header, and the sorting functionality remains intact. Here's the complete, updated webpage.
+
+<xaiArtifact artifact_id="6848969a-8b36-4750-8fb8-ee572de44adb" artifact_version_id="3bcea7f1-cdb8-440b-9558-5c521c5cfe8e" title="index.html" contentType="text/html">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortable Spreadsheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold">Sortable Spreadsheet</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto my-8 p-4 bg-white rounded-lg shadow-md">
+        <section>
+            <h2 class="text-xl font-semibold mb-4">Data Table</h2>
+            <div class="overflow-x-auto">
+                <table id="dataTable" class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(0)">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(1)">Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(2)">HP</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(3)">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Alysnes</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">34000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">85.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Falcon</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">26000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">92.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Tricera</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">70000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">78.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">4</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Welkin</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">48000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">88.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">5</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Narukami</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">90.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">6</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Hurricane</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">50000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">87.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">7</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Luminae</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">91.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">8</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Aquila</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">39000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">84.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">9</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Pinaka</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">37000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">89.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">10</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Skyraider</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">86.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">11</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Stego</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">78000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">80.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">12</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Panther</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">93.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">13</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Inferno</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">47000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">79.5</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">14</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Serenith</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">31000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">94.0</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">15</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Stellaris</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">30000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">88.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4">
+        <p>© 2025 Sortable Spreadsheet. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Sorting function
+        let sortDirection = {};
+        
+        function sortTable(columnIndex) {
+            const table = document.getElementById("dataTable");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+            
+            // Toggle sort direction for the clicked column
+            sortDirection[columnIndex] = !sortDirection[columnIndex];
+            const isAscending = sortDirection[columnIndex];
+            
+            // Sort rows
+            rows.sort((rowA, rowB) => {
+                const cellA = rowA.cells[columnIndex].textContent.trim();
+                const cellB = rowB.cells[columnIndex].textContent.trim();
+                
+                // Convert to number if possible, otherwise treat as string
+                const valueA = isNaN(cellA) ? cellA.toLowerCase() : parseFloat(cellA);
+                const valueB = isNaN(cellB) ? cellB.toLowerCase() : parseFloat(cellB);
+                
+                if (valueA < valueB) return isAscending ? -1 : 1;
+                if (valueA > valueB) return isAscending ? 1 : -1;
+                return 0;
+            });
+            
+            // Clear and re-append sorted rows
+            tbody.innerHTML = "";
+            rows.forEach(row => tbody.appendChild(row));
+            
+            // Update header styles to indicate sort direction
+            const headers = table.querySelectorAll("th");
+            headers.forEach((header, index) => {
+                header.classList.remove("bg-gray-200");
+                header.textContent = header.textContent.replace(" ↑", "").replace(" ↓", "");
+                if (index === columnIndex) {
+                    header.classList.add("bg-gray-200");
+                    header.textContent += isAscending ? " ↑" : " ↓";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
