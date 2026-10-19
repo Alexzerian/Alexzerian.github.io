@@ -73,6 +73,7 @@ audio {
 }
 </style>
 <script>
+var songLinked = false;
 function startMedia() {
   var video = document.getElementById("bg");
   var audio = document.getElementById("song");
@@ -92,14 +93,21 @@ function startMedia() {
   try {
     audio.loop = true;
     var result = audio.play();
-    if (result && result.catch) result.catch(function () {});
+    if (result && result.then) {
+      result.then(function () {
+        if (!songLinked && video) {
+          songLinked = true;
+          try { video.currentTime = 0; } catch (err) {}
+        }
+      }).catch(function () {});
+    }
   } catch (err) {}
   return false;
 }
 </script>
 </head>
 <body ontouchstart="startMedia()" onclick="startMedia()">
-<video id="bg" src="loading.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
+<video id="bg" src="bg.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
 <button id="hit" type="button" aria-label="Play" ontouchstart="startMedia()" onclick="startMedia()"></button>
 <audio id="song" src="lumiere.mp3" loop autoplay preload="auto"></audio>
 <script>
@@ -117,6 +125,7 @@ function startMedia() {
   });
   audio.addEventListener("ended", function () {
     try { audio.currentTime = 0; } catch (err) {}
+    try { video.currentTime = 0; } catch (err) {}
     startMedia();
   });
   for (var i = 0; i < names.length; i++) {
