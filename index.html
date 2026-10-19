@@ -1,215 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sortable Spreadsheet</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Lumiere</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-text-size-adjust: 100%;
+}
+#gif, #hit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+#gif {
+  object-fit: cover;
+  object-position: 72% center;
+  background: #000 url("loading.gif") 72% center / cover no-repeat;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  pointer-events: none;
+}
+#hit {
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+audio {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+</style>
+<script>
+function startAudio() {
+  var audio = document.getElementById("song");
+  if (!audio) return false;
+  if (!audio.paused && audio.currentTime > 0) return false;
+  try {
+    audio.loop = true;
+    var result = audio.play();
+    if (result && result.catch) result.catch(function () {});
+  } catch (err) {}
+  return false;
+}
+</script>
 </head>
-<body class="bg-gray-100 font-sans">
-    <!-- Header -->
-    <header class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto">
-            <h1 class="text-2xl font-bold">Sortable Spreadsheet</h1>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container mx-auto my-8 p-4 bg-white rounded-lg shadow-md">
-        <section>
-            <h2 class="text-xl font-semibold mb-4">Data Table</h2>
-            <div class="overflow-x-auto">
-                <table id="dataTable" class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(0)">Name</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(1)">HP</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(2)">Blast Def</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(3)">Ballistic Def</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(4)">Physical Def</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" onclick="sortTable(5)">Energy Def</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Alysnes</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">34000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">22%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Falcon</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">26000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">31%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">19%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">23%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">26%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Tricera</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">70000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">46%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">48%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">50%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">31%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Welkin</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">48000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">40%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">36%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">46%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Narukami</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">22%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">19%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">27%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">26%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Hurricane</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">50000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">40%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">36%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">48%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Luminae</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">37%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">22%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">30%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Aquila</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">39000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">35%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">33%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">33%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Pinaka</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">37000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">31%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">36%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Skyraider</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">29%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">36%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">41%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Stego</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">78000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">40%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">42%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">36%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Panther</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">38000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">39%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">41%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">31%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Inferno</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">47000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">33%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">40%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">44%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Serenith</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">31000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">27%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">16%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">34%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">33%</td>
-                        </tr>
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Stellaris</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">30000</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">28%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">30%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">35%</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">32%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center p-4">
-        <p>© 2025 Sortable Spreadsheet. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // Sorting function
-        let sortDirection = {};
-        
-        function sortTable(columnIndex) {
-            const table = document.getElementById("dataTable");
-            const tbody = table.querySelector("tbody");
-            const rows = Array.from(tbody.querySelectorAll("tr"));
-            
-            // Toggle sort direction for the clicked column
-            sortDirection[columnIndex] = !sortDirection[columnIndex];
-            const isAscending = sortDirection[columnIndex];
-            
-            // Sort rows
-            rows.sort((rowA, rowB) => {
-                let cellA = rowA.cells[columnIndex].textContent.trim();
-                let cellB = rowB.cells[columnIndex].textContent.trim();
-                
-                // Handle percentage values for Blast Def, Ballistic Def, Physical Def, and Energy Def
-                if (columnIndex === 2 || columnIndex === 3 || columnIndex === 4 || columnIndex === 5) {
-                    cellA = parseFloat(cellA.replace('%', '')) || 0;
-                    cellB = parseFloat(cellB.replace('%', '')) || 0;
-                } else {
-                    // Convert to number if possible, otherwise treat as string
-                    cellA = isNaN(cellA) ? cellA.toLowerCase() : parseFloat(cellA);
-                    cellB = isNaN(cellB) ? cellB.toLowerCase() : parseFloat(cellB);
-                }
-                
-                if (cellA < cellB) return isAscending ? -1 : 1;
-                if (cellA > cellB) return isAscending ? 1 : -1;
-                return 0;
-            });
-            
-            // Clear and re-append sorted rows
-            tbody.innerHTML = "";
-            rows.forEach(row => tbody.appendChild(row));
-            
-            // Update header styles to indicate sort direction
-            const headers = table.querySelectorAll("th");
-            headers.forEach((header, index) => {
-                header.classList.remove("bg-gray-200");
-                header.textContent = header.textContent.replace(" ↑", "").replace(" ↓", "");
-                if (index === columnIndex) {
-                    header.classList.add("bg-gray-200");
-                    header.textContent += isAscending ? " ↑" : " ↓";
-                }
-            });
-        }
-    </script>
+<body ontouchstart="startAudio()" onclick="startAudio()">
+<img id="gif" src="loading.gif" alt="">
+<button id="hit" type="button" aria-label="Play" ontouchstart="startAudio()" onclick="startAudio()"></button>
+<audio id="song" src="lumiere.mp3" loop autoplay preload="auto"></audio>
+<script>
+(function () {
+  var audio = document.getElementById("song");
+  var names = ["pointerdown", "touchstart", "touchend", "mousedown", "mouseup", "click", "keydown"];
+  audio.loop = true;
+  audio.addEventListener("ended", function () {
+    try { audio.currentTime = 0; } catch (err) {}
+    startAudio();
+  });
+  for (var i = 0; i < names.length; i++) {
+    window.addEventListener(names[i], startAudio, true);
+  }
+  window.addEventListener("load", startAudio);
+  window.addEventListener("pageshow", startAudio);
+  startAudio();
+})();
+</script>
 </body>
 </html>
