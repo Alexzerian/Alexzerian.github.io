@@ -17,7 +17,7 @@ html, body {
   touch-action: none;
   -webkit-text-size-adjust: 100%;
 }
-#gif, #hit {
+#bg, #hit {
   position: fixed;
   top: 0;
   left: 0;
@@ -27,10 +27,10 @@ html, body {
   padding: 0;
   border: 0;
 }
-#gif {
+#bg {
   object-fit: cover;
   object-position: 72% center;
-  background: #000 url("loading.gif") 72% center / cover no-repeat;
+  background: #000;
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
@@ -53,8 +53,20 @@ audio {
 }
 </style>
 <script>
-function startAudio() {
+function startMedia() {
+  var video = document.getElementById("bg");
   var audio = document.getElementById("song");
+  if (video) {
+    try {
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      if (video.paused) {
+        var picture = video.play();
+        if (picture && picture.catch) picture.catch(function () {});
+      }
+    } catch (err) {}
+  }
   if (!audio) return false;
   if (!audio.paused && audio.currentTime > 0) return false;
   try {
@@ -66,25 +78,33 @@ function startAudio() {
 }
 </script>
 </head>
-<body ontouchstart="startAudio()" onclick="startAudio()">
-<img id="gif" src="loading.gif" alt="">
-<button id="hit" type="button" aria-label="Play" ontouchstart="startAudio()" onclick="startAudio()"></button>
+<body ontouchstart="startMedia()" onclick="startMedia()">
+<video id="bg" src="loading.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
+<button id="hit" type="button" aria-label="Play" ontouchstart="startMedia()" onclick="startMedia()"></button>
 <audio id="song" src="lumiere.mp3" loop autoplay preload="auto"></audio>
 <script>
 (function () {
+  var video = document.getElementById("bg");
   var audio = document.getElementById("song");
   var names = ["pointerdown", "touchstart", "touchend", "mousedown", "mouseup", "click", "keydown"];
+  video.loop = true;
+  video.muted = true;
+  video.playsInline = true;
   audio.loop = true;
+  video.addEventListener("ended", function () {
+    try { video.currentTime = 0; } catch (err) {}
+    startMedia();
+  });
   audio.addEventListener("ended", function () {
     try { audio.currentTime = 0; } catch (err) {}
-    startAudio();
+    startMedia();
   });
   for (var i = 0; i < names.length; i++) {
-    window.addEventListener(names[i], startAudio, true);
+    window.addEventListener(names[i], startMedia, true);
   }
-  window.addEventListener("load", startAudio);
-  window.addEventListener("pageshow", startAudio);
-  startAudio();
+  window.addEventListener("load", startMedia);
+  window.addEventListener("pageshow", startMedia);
+  startMedia();
 })();
 </script>
 </body>
